@@ -1,12 +1,26 @@
+#!/usr/bin/python3
+# coding: utf-8
+
+# In[1]:
+
+
 import numpy as np
 import networkx as nx
+
+
+# In[2]:
+
 
 def linear(n):
     # returns the matrix for linear polyene of length n, with alpha = 0 and beta = -1
     n_int = int(n)
     M = np.array([[-1 if i == j - 1 or i == j + 1 else 0 for i in range(n_int)] for j in range(n_int)])
     return M
-    
+
+
+# In[3]:
+
+
 def cyclic(n):
     # returns the matrix for linear polyene of length n, with alpha = 0 and beta = -1
     n_int = int(n)
@@ -14,7 +28,11 @@ def cyclic(n):
     M[0,(n_int-1)] = -1
     M[(n_int-1),0] = -1
     return M
-    
+
+
+# In[4]:
+
+
 def platonic(n): # n must be 4, 6, 8, 12 or 20
     # returns the matrix for sp2 platonic solid, with alpha = 0 and beta = -1
     n_int = int(n)
@@ -33,12 +51,20 @@ def platonic(n): # n must be 4, 6, 8, 12 or 20
     
     M = - nx.adjacency_matrix(s)
     return M.todense()
-    
+
+
+# In[5]:
+
+
 def get_evals(Ma):
     # calculates the eigenvalues for a symmetric matrix
     evalss, evecs = np.linalg.eigh(Ma)
     return evalss
-    
+
+
+# In[6]:
+
+
 def degen(evals):
     # calculates the degeneracies of each eigenvalue
     test = 0
@@ -58,7 +84,12 @@ def degen(evals):
         result.append((round(test,3), count))
         
     return result
-    
+        
+
+
+# In[ ]:
+
+
 def huckel():
     # this function gathers information from the user and executes the chosen tasks
     repeat = "yes"
